@@ -15,32 +15,36 @@ public class CategoriaResource {
     @Autowired
     private CategoriaService categoriaService;
 
+    @PostMapping
     public ResponseEntity<Categoria> criarCategoria(@RequestBody Categoria categoria){
-
         Categoria novaCategoria = categoriaService.criarCategoria(categoria);
         return  new ResponseEntity<>(novaCategoria, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Categoria>>listarCategoria(){
+    public ResponseEntity<List<Categoria>> listarCategoria(){
         List<Categoria> categorias = categoriaService.listarCategoria();
         return new ResponseEntity<>(categorias, HttpStatus.OK);
     }
 
     @GetMapping("/{idCategoria}")
-    public ResponseEntity<Categoria>buscarCategoria(@PathVariable Integer idCategoria){
+    public ResponseEntity<Categoria> buscarCategoria(@PathVariable Integer idCategoria){
         return categoriaService.buscarCategoria(idCategoria)
                 .map(categoria -> new ResponseEntity<>(categoria, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @DeleteMapping("/{idCategoria}")
-    public ResponseEntity<Void> daletarCategoria(@PathVariable Integer idCategoria){
+    public ResponseEntity<Void> deletarCategoria(@PathVariable Integer idCategoria){
         categoriaService.deletarCategoria(idCategoria);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
     @PutMapping("/{idCategoria}")
-    public ResponseEntity<Categoria> atualizarCategoria(@PathVariable Integer idCategoria, @RequestBody Categoria categoria) {
-        if (!categoriaService.buscarCategoria(idCategoria).isPresent()) {
+    public ResponseEntity<Categoria> atualizarCategoria(
+            @PathVariable Integer idCategoria,
+            @RequestBody Categoria categoria){
+        if(!categoriaService.buscarCategoria(idCategoria).isPresent()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         categoria.setIdCategoria(idCategoria);

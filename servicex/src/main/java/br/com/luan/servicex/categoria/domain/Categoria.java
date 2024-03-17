@@ -11,7 +11,7 @@ public class Categoria {
     @Id
     @GeneratedValue
     @Column(name = "ID_CATEGORIA")
-    private Integer idCategoria;
+    private Integer idCategoria ;
     @Column(name = "NOME_CATEGORIA")
     private String nomeCategoria;
     @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
