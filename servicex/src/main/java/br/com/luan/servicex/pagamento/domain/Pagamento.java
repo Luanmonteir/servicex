@@ -13,7 +13,7 @@ public abstract class Pagamento {
     @Column(name = "STATUS_PAGAMENTO")
     private Integer statusPagamento;
     @OneToOne
-    @JoinColumn(name = "ID_OS")
+    @JoinColumn(name = "ID_ORDEMSERVICO")
     @MapsId
     private OrdemServico ordemServico;
 
