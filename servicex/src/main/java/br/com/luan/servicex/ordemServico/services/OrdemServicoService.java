@@ -1,7 +1,7 @@
-package br.com.luan.servicex.ordemservico.services;
+package br.com.luan.servicex.ordemServico.services;
 
-import br.com.luan.servicex.ordemservico.domain.OrdemServico;
-import br.com.luan.servicex.ordemservico.repositores.OrdemServicoRepository;
+import br.com.luan.servicex.ordemServico.domain.OrdemServico;
+import br.com.luan.servicex.ordemServico.repositores.OrdemServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

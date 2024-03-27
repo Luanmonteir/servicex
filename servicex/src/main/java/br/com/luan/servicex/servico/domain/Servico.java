@@ -1,7 +1,7 @@
 package br.com.luan.servicex.servico.domain;
 
 import br.com.luan.servicex.categoria.domain.Categoria;
-import br.com.luan.servicex.ordemservico.domain.OrdemServico;
+import br.com.luan.servicex.ordemServico.domain.OrdemServico;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

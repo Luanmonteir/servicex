@@ -1,5 +1,6 @@
-package br.com.luan.servicex.ordemservico.domain;
+package br.com.luan.servicex.ordemServico.domain;
 
+import br.com.luan.servicex.pagamento.domain.Pagamento;
 import br.com.luan.servicex.servico.domain.Servico;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,7 +20,8 @@ public class OrdemServico {
     private Double valorOrdemServico;
     @Column(name = "DATA_SOLICITACAO")
     private Date dataSolicitacao;
-
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "ordemsevico")
+    private Pagamento pagamento;
 
     @ManyToMany
     @JoinTable(name = "SERVICO_ORDEM_SERVICO",
