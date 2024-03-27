@@ -1,9 +1,9 @@
-package br.com.luan.servicex.categoria.resources;
+package br.com.luan.servicex.servico.resources;
 
 
 
-import br.com.luan.servicex.categoria.domain.Servico;
-import br.com.luan.servicex.categoria.services.ServicoService;
+import br.com.luan.servicex.servico.domain.Servico;
+import br.com.luan.servicex.servico.services.ServicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

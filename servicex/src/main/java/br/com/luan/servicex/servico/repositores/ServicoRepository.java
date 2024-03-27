@@ -1,6 +1,6 @@
-package br.com.luan.servicex.categoria.repositores;
+package br.com.luan.servicex.servico.repositores;
 
-import br.com.luan.servicex.categoria.domain.Servico;
+import br.com.luan.servicex.servico.domain.Servico;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

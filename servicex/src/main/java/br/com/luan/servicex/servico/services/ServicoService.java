@@ -1,8 +1,8 @@
-package br.com.luan.servicex.categoria.services;
+package br.com.luan.servicex.servico.services;
 
 
-import br.com.luan.servicex.categoria.domain.Servico;
-import br.com.luan.servicex.categoria.repositores.ServicoRepository;
+import br.com.luan.servicex.servico.domain.Servico;
+import br.com.luan.servicex.servico.repositores.ServicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
