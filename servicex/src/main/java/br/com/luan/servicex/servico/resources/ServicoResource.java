@@ -1,6 +1,7 @@
 package br.com.luan.servicex.servico.resources;
 
 import br.com.luan.servicex.servico.domain.Servico;
+import br.com.luan.servicex.servico.domain.ServicoDTO;
 import br.com.luan.servicex.servico.services.ServicoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -24,9 +27,12 @@ public class ServicoResource {
             @ApiResponse(responseCode = "201", description = "Serviço criado com sucesso")
     })
     @PostMapping
-    public ResponseEntity<Servico> criarServico(@RequestBody Servico servico) {
-        Servico novoServico = servicoService.criarServico(servico);
-        return new ResponseEntity<>(novoServico, HttpStatus.CREATED);
+    public ResponseEntity<Servico> criarServico(@RequestBody ServicoDTO servicoDTO) {
+        Servico servico = servicoService.fromDTOService(servicoDTO);
+        servico = servicoService.criarServico(servico);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+                .buildAndExpand(servico.getIdServico()).toUri();
+        return  ResponseEntity.created(uri).build();
     }
 
     @Operation(summary = "Lista todos os serviços")
@@ -34,10 +40,12 @@ public class ServicoResource {
             @ApiResponse(responseCode = "200", description = "Lista de serviços")
     })
     @GetMapping
-    public ResponseEntity<List<Servico>> listarServico() {
+    public ResponseEntity<List<Servico>> listarServicos() {
         List<Servico> servicos = servicoService.listarServico();
         return new ResponseEntity<>(servicos, HttpStatus.OK);
     }
+
+
 
     @Operation(summary = "Busca um serviço pelo ID")
     @ApiResponses(value = {
@@ -46,10 +54,10 @@ public class ServicoResource {
     })
     @GetMapping("/{idServico}")
     public ResponseEntity<Servico> buscarServico(@PathVariable Integer idServico) {
-        return servicoService.buscarServico(idServico)
-                .map(servico -> new ResponseEntity<>(servico, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+        Servico servico = servicoService.buscarServico(idServico);
+        return ResponseEntity.ok().body(servico);
     }
+
 
     @Operation(summary = "Deleta um serviço pelo ID")
     @ApiResponses(value = {
@@ -62,20 +70,19 @@ public class ServicoResource {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+
+
     @Operation(summary = "Atualiza um serviço existente pelo ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Serviço atualizado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Serviço não encontrado")
     })
     @PutMapping("/{idServico}")
-    public ResponseEntity<Servico> atualizarServico(
-            @PathVariable Integer idServico,
-            @RequestBody Servico servico) {
-        if (!servicoService.buscarServico(idServico).isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Servico> atualizarServico(@PathVariable Integer idServico, @RequestBody ServicoDTO servicoDTO) {
+        Servico servico = servicoService.fromDTOService(servicoDTO);
         servico.setIdServico(idServico);
-        Servico novoServico = servicoService.atualizarServico(servico);
-        return new ResponseEntity<>(novoServico, HttpStatus.OK);
+        servicoService.atualizarServico(servico);
+        return ResponseEntity.noContent().build();
     }
+
 }
