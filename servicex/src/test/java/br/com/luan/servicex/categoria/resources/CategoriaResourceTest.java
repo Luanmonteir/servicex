@@ -88,7 +88,7 @@ verify(categoriaRepository).deleteById(categoriaId);: Verifica se o método dele
         verify(categoriaRepository).save(categoriaExistente);
     }
 }
-    /*Integer categoriaId = 1;: Define um ID de categoria a ser atualizado.
+/*Integer categoriaId = 1;: Define um ID de categoria a ser atualizado.
 Cria uma Categoria existente com nome "Old Category".
 Cria uma Categoria atualizada com nome "Updated Category".
 when(categoriaRepository.findById(categoriaId)).thenReturn(Optional.of(categoriaExistente));: Simula que a categoria com o ID fornecido existe no repositório.

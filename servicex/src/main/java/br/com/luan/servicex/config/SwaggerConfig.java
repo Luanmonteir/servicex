@@ -10,9 +10,10 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI customAPI(){
+    public OpenAPI customAPI() {
         return new OpenAPI().info(new Info().title("API DE ORDEM DE SERVIÇO").description("Sistema para gestão de clientes e ordem de serviços").version("1.0.0"));
     }
+
     @Bean
     public GroupedOpenApi publicApi() {
         return GroupedOpenApi.builder()
