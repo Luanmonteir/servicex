@@ -41,8 +41,12 @@ public class CategoriaService {
         return categoriaRepository.save(novaCategoria);
     }
 
-    public void deletarCategoria(Integer idCategoria) {
-        categoriaRepository.deleteById(idCategoria);
+    public void deletarCategoria(Integer id) {
+        if (categoriaRepository.existsById(id)) {
+            categoriaRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Categoria não encontrada");
+        }
     }
     public Categoria fromDTO(CategoriaDTO categoriaDTO){
         return new Categoria(categoriaDTO.getIdCategoria(), categoriaDTO.getNomeCategoria());
